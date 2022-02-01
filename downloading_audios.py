@@ -11,6 +11,8 @@ playlist_links = {'ParishkarWorld_Q&A':"https://www.youtube.com/watch?v=RoPzDX_q
                  'ParishkarWorld_ImportantEvents':"https://www.youtube.com/watch?v=kN5H-SZIcVM&list=PL6TVOPSRQK7icn73OT1UBAOboeLQFLJRN"}
 				 
 
+# downloading the audios of each video in each playlist and saving it.
+# each playlist has its one folder named "playlist name" and the individual audio file in them are names "playlist name_0, playlist name_1, etc."
 for playlist_link in playlist_links.values():
     count = 0
     play = 0
