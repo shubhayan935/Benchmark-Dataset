@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from pytube import Playlist
 import os
 import youtube_dl
+from pathlib import Path
 
 # dictionary of the links to the playlists
 playlist_links = {'ParishkarWorld_Q&A':"https://www.youtube.com/watch?v=RoPzDX_qKtQ&list=PL6TVOPSRQK7gnwpKpk7Lhv0OYeW-_squv", 
@@ -18,10 +19,12 @@ for playist_link in playlist_links.values():
     play = 0
     p = Playlist(playlist_link)
     for vid_url in p.video_urls:
-        filename = "Audios/"+str(list(playlist_links.keys())[play])+"/"+str(count)+".mp3"
-        if os.path.exists(filename):
+        my_file = Path("Audios/"+str(list(playlist_links.keys())[play])+"/"+str(count)+".mp3")
+        if my_file.is_file():
+            count += 1
             continue
         else:
+            filename = "Audios/"+str(list(playlist_links.keys())[play])+"/"+str(count)+".mp3"
             ydl_opts = {'outtmpl': filename}
             with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                 ydl.download([vid_url])
