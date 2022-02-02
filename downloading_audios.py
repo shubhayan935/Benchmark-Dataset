@@ -13,14 +13,17 @@ playlist_links = {'ParishkarWorld_Q&A':"https://www.youtube.com/watch?v=RoPzDX_q
 
 # downloading the audios of each video in each playlist and saving it.
 # each playlist has its one folder named "playlist name" and the individual audio file in them are names "playlist name_0, playlist name_1, etc."
-for playlist_link in playlist_links.values():
+for playist_link in playlist_links.values():
     count = 0
     play = 0
     p = Playlist(playlist_link)
     for vid_url in p.video_urls:
         filename = "Audios/"+str(list(playlist_links.keys())[play])+"/"+str(count)+".mp3"
-        ydl_opts = {'outtmpl': filename}
-        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([vid_url])
-        count += 1
+        if os.path.exists(filename):
+            continue
+        else:
+            ydl_opts = {'outtmpl': filename}
+            with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+                ydl.download([vid_url])
+            count += 1
     play+=1
